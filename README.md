@@ -1,5 +1,5 @@
-# etl-batch-k8s-spark-airflow
-Skeleton of a batch ETL pipeline, using Spark to extract, transform, and load data into a Clickhouse data warehouse, with Airflow for DAG orchestration. Run on Kubernetes using KubernetesPodOperator.
+# Batch ETL Pipeline
+Skeleton of a batch ETL using Spark to extract, transform, and load data into a Clickhouse data warehouse, with Airflow for DAG orchestration. Run on Kubernetes using KubernetesPodOperator.
 
 ![ETL Architecture](images/etl-k8s-flow.svg)
 
