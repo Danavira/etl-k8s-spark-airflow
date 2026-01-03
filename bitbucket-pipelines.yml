@@ -1,0 +1,53 @@
+pipelines:
+  branches:
+    staging:
+      - step:
+          name: Build Airflow Image (Staging)
+          services:
+            - docker
+          caches:
+            - docker
+          script:
+            - export IMAGE="${DOCKER_REGISTRY}/${AIRFLOW_IMAGE_NAME_STAGING}"
+            - docker login "$DOCKER_.github/workflows/docker-build.yml REGISTRY" -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+            - docker build --no-cache -f Dockerfile.Airflow -t "$IMAGE" .
+            - docker push "$IMAGE"
+
+      - step:
+          name: Build Spark Image (Staging)
+          services:
+            - docker
+          caches:
+            - docker
+          script:
+            - export IMAGE="${DOCKER_REGISTRY}/${SPARK_IMAGE_NAME_STAGING}"
+            - docker login "$DOCKER_REGISTRY" -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+            - docker build --no-cache -f Dockerfile.Spark -t "$IMAGE" .
+            - docker push "$IMAGE"
+
+    main:
+      - step:
+          name: Build Airflow Image (Production)
+          services:
+            - docker
+          caches:
+            - docker
+          script:
+            - export IMAGE="${DOCKER_REGISTRY}/${AIRFLOW_IMAGE_NAME_PROD}"
+            - docker build -f Dockerfile.Airflow -t "$IMAGE" .
+            - docker tag "$IMAGE" "$IMAGE:${BITBUCKET_COMMIT::7}"
+            - docker login "$DOCKER_REGISTRY" -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+            - docker push --all-tags "$IMAGE"
+
+      - step:
+          name: Build Spark Image (Production)
+          services:
+            - docker
+          caches:
+            - docker
+          script:
+            - export IMAGE="${DOCKER_REGISTRY}/${SPARK_IMAGE_NAME_PROD}"
+            - docker build -f Dockerfile.Spark -t "$IMAGE" .
+            - docker tag "$IMAGE" "$IMAGE:${BITBUCKET_COMMIT::7}"
+            - docker login "$DOCKER_REGISTRY" -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+            - docker push --all-tags "$IMAGE"

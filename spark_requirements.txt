@@ -1,0 +1,9 @@
+tenacity==9.0.0
+psycopg2-binary==2.9.9
+clickhouse-connect==0.8.3
+python-dotenv==1.0.1
+PyYAML>=6.0.1
+pandas>=2.0.0
+clickhouse-driver==0.2.6
+asyncpg
+phonenumbers==9.0.17

@@ -1,0 +1,18 @@
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
+
+PROJECT_ROOT = os.getenv('PROJECT_ROOT')
+TARGET_HOST = os.getenv("TARGET_HOST")
+TARGET_PORT = os.getenv("TARGET_PORT")
+TARGET_USERNAME = os.getenv("TARGET_USERNAME")
+TARGET_PASSWORD = os.getenv("TARGET_PASSWORD")
+SOURCE_HOST = os.getenv("SOURCE_HOST")
+SOURCE_PORT = os.getenv("SOURCE_PORT")
+SOURCE_USERNAME = os.getenv("SOURCE_USERNAME")
+SOURCE_PASSWORD = os.getenv("SOURCE_PASSWORD")
+SOURCE_DATABASE = os.getenv("SOURCE_DATABASE")
+NAMESPACE = os.getenv("NAMESPACE")
+SPARK_IMAGE = os.getenv("SPARK_IMAGE")
+AIRFLOW_IMAGE = os.getenv("AIRFLOW_IMAGE")

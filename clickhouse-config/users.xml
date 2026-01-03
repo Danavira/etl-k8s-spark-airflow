@@ -1,0 +1,64 @@
+<yandex>
+    <users>
+        <yasatjoe>
+            <password></password>
+            <networks>
+                <ip>::/0</ip>
+            </networks>
+            <profile>heavy</profile>
+            <!-- <quota>default</quota> -->
+        </yasatjoe>
+
+        <default>
+            <password></password>
+            <networks>
+                <ip>::/0</ip>
+            </networks>
+            <profile>default</profile>
+            <!-- <quota>default</quota> -->
+        </default>
+    </users>
+
+    <profiles>
+      <default>
+          <max_memory_usage>20000000000</max_memory_usage>                  <!-- ~20 GB – safe sweet spot for most servers -->
+          
+          <join_algorithm>grace_hash,partial_merge,direct,hash</join_algorithm>
+          <any_join_distinct_right_table_keys>1</any_join_distinct_right_table_keys>
+          
+          <max_bytes_before_external_group_by>10000000000</max_bytes_before_external_group_by>  <!-- 10 GB → spills to disk gracefully -->
+          <max_bytes_before_external_sort>10000000000</max_bytes_before_external_sort>
+
+          <use_uncompressed_cache>1</use_uncompressed_cache>
+          <load_balancing>random</load_balancing>
+          <compile_expressions>1</compile_expressions>                     <!-- big speed win on complex queries -->
+          <min_count_to_compile_expression>3</min_count_to_compile_expression>
+          
+          <output_format_pretty_max_rows>10000</output_format_pretty_max_rows>
+          <output_format_pretty_row_numbers>1</output_format_pretty_row_numbers>
+
+          <!-- Optional but strongly recommended -->
+          <allow_experimental_analyzer>1</allow_experimental_analyzer>     <!-- new analyzer = better plans, fewer bugs -->
+      </default>
+
+      <!-- Keep a separate heavy profile for really big queries -->
+      <heavy>
+          <max_memory_usage>80000000000</max_memory_usage>                  <!-- 80 GB – only when you need it -->
+          <max_bytes_before_external_group_by>40000000000</max_bytes_before_external_group_by>
+          <join_algorithm>grace_hash,partial_merge</join_algorithm>
+      </heavy>
+  </profiles>
+
+    <!-- <quotas>
+        <default>
+            <interval>
+                <duration>3600</duration>
+                <queries>0</queries>
+                <errors>0</errors>
+                <result_rows>0</result_rows>
+                <read_rows>0</read_rows>
+                <execution_time>0</execution_time>
+            </interval>
+        </default>
+    </quotas> -->
+</yandex>

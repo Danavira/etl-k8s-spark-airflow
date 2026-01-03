@@ -1,0 +1,9 @@
+FROM apache/airflow:2.9.0-python3.12
+
+USER 50000
+WORKDIR /opt/airflow
+
+COPY airflow_requirements.txt /opt/airflow/requirements.txt
+RUN pip install --no-cache-dir -r /opt/airflow/requirements.txt
+
+COPY dags /opt/airflow/dags

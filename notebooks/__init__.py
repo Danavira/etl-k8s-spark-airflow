@@ -1,0 +1,1 @@
+from scripts.run_pipeline import transform_ready_tables

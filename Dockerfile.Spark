@@ -1,0 +1,27 @@
+# Dockerfile.spark
+FROM apache/spark:3.5.3
+
+USER root
+
+#Copy spark requirements and delete after installation
+COPY spark_requirements.txt /tmp/spark_requirements.txt 
+RUN pip install --no-cache-dir -r /tmp/spark_requirements.txt \ 
+    && rm /tmp/spark_requirements.txt
+
+# Make dummy directory for file uploads by spark
+RUN mkdir -p /opt/spark/upload && \
+    chown -R 185:185 /opt/spark/upload
+
+# Copy ONLY your ETL code
+COPY ./jars /opt/spark/jars/
+COPY --chown=185:185 ./scripts /opt/spark/scripts
+COPY --chown=185:185 ./src /opt/spark/src
+COPY --chown=185:185 ./config /opt/spark/config
+
+ENV PYTHONPATH=/opt/spark/src:$PYTHONPATH
+ENV PROJECT_ROOT=/opt/spark
+
+# Copy log blocker file
+COPY --chown=185:185 log4j2.properties /opt/spark/conf/log4j2.properties
+
+USER 185

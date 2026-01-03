@@ -1,0 +1,32 @@
+# transform config format (as of 29/10/2025)
+table:
+  #table_type: dim/fact
+  ready:
+    chief_x: False
+    chief_y: False
+  transformation_order:
+  custom_table_transform: clean_table
+  dependent_table:
+  partition_by:
+  keep_columns:
+  join:
+    how:
+    left:
+    right:
+    with_table:
+    clickhouse:
+    right_table_columns:
+    replace_columns:
+    filter_rows:
+  rename_columns:
+  upper:
+  convert_one_to_zero:
+  convert_zero_to_null:
+  - list
+  convert_blank_to_null: True
+  convert_yn_to_boolean:
+  convert_scale_100: #commented out
+  convert_scale_1000: #commented out
+  rounding:
+  filter_deleted:
+  fix_extract_date:
