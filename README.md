@@ -1,5 +1,5 @@
 # Batch ETL Pipeline on Kubernetes
-Skeleton of a batch ETL using Spark to transform and load data into a ClickHouse data warehouse, with Airflow for orchestration. Run on Kubernetes using ```KubernetesPodOperator```.
+Skeleton of a simple batch ETL using Spark to transform and load data into a ClickHouse data warehouse, with Airflow for orchestration. Run on Kubernetes using ```KubernetesPodOperator```.
 
 ![ETL Architecture](images/etl-k8s-flow.svg)
 
