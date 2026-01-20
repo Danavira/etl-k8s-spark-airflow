@@ -57,6 +57,7 @@ This was my first ever ETL solution, so pardon the inefficiencies and naiveties.
 - Turn into ELT (given the warehouse resources are larger and more scalable).
 - Add a custom "crawler" (really just spark's infer schema) to save metadata to a metadata store.
 - Add datasets from third parties to enrich data.
+- Choose more optimized data types.
 - Stream logs to a metric visualizer (absolutely overkill but cool!).
 - Increase modularity of metadata config and DAG tasks.
 - Implemented log-based CDC instead of naive query-based CDC.
